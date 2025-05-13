@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PlantDiary</string>
+    <string-array name="opciones_agua">
+        <item>Mucha</item>
+        <item>Media</item>
+        <item>Poca</item>
+    </string-array>
+
 </resources>

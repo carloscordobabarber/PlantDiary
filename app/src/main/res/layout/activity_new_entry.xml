@@ -1,10 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewEntryActivity">
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:hint="Nombre de la planta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/etFrecuenciaRiego"
+            android:hint="Frecuencia de riego (días)"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cantidad de agua:" />
+
+        <Spinner
+            android:id="@+id/spinnerCantidadAgua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cantidad de sol:" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupSol"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioSolMucha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mucha" />
+
+            <RadioButton
+                android:id="@+id/radioSolMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Media" />
+
+            <RadioButton
+                android:id="@+id/radioSolPoca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Poca" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etComentarios"
+            android:hint="Comentarios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="3" />
+
+        <EditText
+            android:id="@+id/etImagenUri"
+            android:hint="URI o nombre de imagen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:text="Guardar Entrada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>
