@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,12 +45,13 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
         holder.txtSol.setText("Sol: " + entrada.getCantidadSol());
         holder.txtComentarios.setText("Notas: " + entrada.getComentarios());
 
-        try {
-            Uri uri = Uri.parse(entrada.getImagenUri());
-            holder.imgPlanta.setImageURI(uri);
-        } catch (Exception e) {
-            holder.imgPlanta.setImageResource(R.drawable.ic_launcher_foreground);
-        }
+
+        Uri uri = Uri.parse(entrada.getImagenUri());
+        Glide.with(context)
+                .load(uri)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(holder.imgPlanta);
 
         holder.btnEliminar.setOnClickListener(v -> {
             entradas.remove(position);
