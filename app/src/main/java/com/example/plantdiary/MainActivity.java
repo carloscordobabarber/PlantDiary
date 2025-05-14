@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EntryStorage.cargarDesdePreferencias(this);
         setContentView(R.layout.activity_main);
 
         recyclerEntradas = findViewById(R.id.recyclerEntradas);

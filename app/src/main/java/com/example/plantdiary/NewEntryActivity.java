@@ -79,7 +79,7 @@ public class NewEntryActivity extends AppCompatActivity {
             String imagenUri = (imagenSeleccionadaUri != null) ? imagenSeleccionadaUri.toString() : "";
 
             PlantEntry nuevaEntrada = new PlantEntry(nombre, frecuencia, cantidadAgua, cantidadSol, comentarios, imagenUri);
-            EntryStorage.agregarEntrada(nuevaEntrada);
+            EntryStorage.agregarEntrada(this, nuevaEntrada);
 
             finish();
         });

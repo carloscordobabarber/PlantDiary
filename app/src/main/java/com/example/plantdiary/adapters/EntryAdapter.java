@@ -1,12 +1,12 @@
-package com.example.plantdiary.adapters;
-
 // EntryAdapter.java
+package com.example.plantdiary.adapters;
 
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.plantdiary.R;
 import com.example.plantdiary.models.PlantEntry;
+import com.example.plantdiary.storage.EntryStorage;
 
 import java.util.List;
 
@@ -36,8 +37,12 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
     @Override
     public void onBindViewHolder(EntryViewHolder holder, int position) {
         PlantEntry entrada = entradas.get(position);
+
         holder.txtNombre.setText(entrada.getNombre());
-        holder.txtFrecuencia.setText("Riego: " + entrada.getFrecuenciaRiego());
+        holder.txtFrecuencia.setText("Riego: cada " + entrada.getFrecuenciaRiego() + " días");
+        holder.txtAgua.setText("Agua: " + entrada.getCantidadAgua());
+        holder.txtSol.setText("Sol: " + entrada.getCantidadSol());
+        holder.txtComentarios.setText("Notas: " + entrada.getComentarios());
 
         try {
             Uri uri = Uri.parse(entrada.getImagenUri());
@@ -45,6 +50,13 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
         } catch (Exception e) {
             holder.imgPlanta.setImageResource(R.drawable.ic_launcher_foreground);
         }
+
+        holder.btnEliminar.setOnClickListener(v -> {
+            entradas.remove(position);
+            EntryStorage.eliminarEntrada(context, position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, entradas.size());
+        });
     }
 
     @Override
@@ -53,14 +65,19 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
     }
 
     public static class EntryViewHolder extends RecyclerView.ViewHolder {
-        TextView txtNombre, txtFrecuencia;
+        TextView txtNombre, txtFrecuencia, txtAgua, txtSol, txtComentarios;
         ImageView imgPlanta;
+        Button btnEliminar;
 
         public EntryViewHolder(View itemView) {
             super(itemView);
             txtNombre = itemView.findViewById(R.id.txtNombre);
             txtFrecuencia = itemView.findViewById(R.id.txtFrecuencia);
+            txtAgua = itemView.findViewById(R.id.txtAgua);
+            txtSol = itemView.findViewById(R.id.txtSol);
+            txtComentarios = itemView.findViewById(R.id.txtComentarios);
             imgPlanta = itemView.findViewById(R.id.imgPlanta);
+            btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
     }
 }
