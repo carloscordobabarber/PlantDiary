@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -69,7 +70,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
     public static class EntryViewHolder extends RecyclerView.ViewHolder {
         TextView txtNombre, txtFrecuencia, txtAgua, txtSol, txtComentarios;
         ImageView imgPlanta;
-        Button btnEliminar;
+        ImageButton btnEliminar;
 
         public EntryViewHolder(View itemView) {
             super(itemView);
