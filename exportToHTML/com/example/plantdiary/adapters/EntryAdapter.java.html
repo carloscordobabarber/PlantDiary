@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>EntryAdapter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+EntryAdapter.java</font>
+</center></td></tr></table>
+<pre><span class="s0">// EntryAdapter.java</span>
+<span class="s2">package </span><span class="s1">com</span><span class="s3">.</span><span class="s1">example</span><span class="s3">.</span><span class="s1">plantdiary</span><span class="s3">.</span><span class="s1">adapters</span><span class="s3">;</span>
+
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">content</span><span class="s3">.</span><span class="s1">Context</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">net</span><span class="s3">.</span><span class="s1">Uri</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">view</span><span class="s3">.</span><span class="s1">LayoutInflater</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">view</span><span class="s3">.</span><span class="s1">View</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">view</span><span class="s3">.</span><span class="s1">ViewGroup</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">Button</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">ImageButton</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">ImageView</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">TextView</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">com</span><span class="s3">.</span><span class="s1">bumptech</span><span class="s3">.</span><span class="s1">glide</span><span class="s3">.</span><span class="s1">Glide</span><span class="s3">;</span>
+
+<span class="s2">import </span><span class="s1">androidx</span><span class="s3">.</span><span class="s1">recyclerview</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">RecyclerView</span><span class="s3">;</span>
+
+<span class="s2">import </span><span class="s1">com</span><span class="s3">.</span><span class="s1">example</span><span class="s3">.</span><span class="s1">plantdiary</span><span class="s3">.</span><span class="s1">R</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">com</span><span class="s3">.</span><span class="s1">example</span><span class="s3">.</span><span class="s1">plantdiary</span><span class="s3">.</span><span class="s1">models</span><span class="s3">.</span><span class="s1">PlantEntry</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">com</span><span class="s3">.</span><span class="s1">example</span><span class="s3">.</span><span class="s1">plantdiary</span><span class="s3">.</span><span class="s1">storage</span><span class="s3">.</span><span class="s1">EntryStorage</span><span class="s3">;</span>
+
+<span class="s2">import </span><span class="s1">java</span><span class="s3">.</span><span class="s1">util</span><span class="s3">.</span><span class="s1">List</span><span class="s3">;</span>
+
+<span class="s2">public class </span><span class="s1">EntryAdapter </span><span class="s2">extends </span><span class="s1">RecyclerView</span><span class="s3">.</span><span class="s1">Adapter</span><span class="s3">&lt;</span><span class="s1">EntryAdapter</span><span class="s3">.</span><span class="s1">EntryViewHolder</span><span class="s3">&gt; {</span>
+
+    <span class="s2">private </span><span class="s1">List</span><span class="s3">&lt;</span><span class="s1">PlantEntry</span><span class="s3">&gt; </span><span class="s1">entradas</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">Context context</span><span class="s3">;</span>
+
+    <span class="s2">public </span><span class="s1">EntryAdapter</span><span class="s3">(</span><span class="s1">Context context</span><span class="s3">, </span><span class="s1">List</span><span class="s3">&lt;</span><span class="s1">PlantEntry</span><span class="s3">&gt; </span><span class="s1">entradas</span><span class="s3">) {</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">context </span><span class="s3">= </span><span class="s1">context</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">entradas </span><span class="s3">= </span><span class="s1">entradas</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s2">public </span><span class="s1">EntryViewHolder onCreateViewHolder</span><span class="s3">(</span><span class="s1">ViewGroup parent</span><span class="s3">, </span><span class="s2">int </span><span class="s1">viewType</span><span class="s3">) {</span>
+        <span class="s1">View vista </span><span class="s3">= </span><span class="s1">LayoutInflater</span><span class="s3">.</span><span class="s1">from</span><span class="s3">(</span><span class="s1">context</span><span class="s3">).</span><span class="s1">inflate</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">layout</span><span class="s3">.</span><span class="s1">item_plant_entry</span><span class="s3">, </span><span class="s1">parent</span><span class="s3">, </span><span class="s2">false</span><span class="s3">);</span>
+        <span class="s2">return new </span><span class="s1">EntryViewHolder</span><span class="s3">(</span><span class="s1">vista</span><span class="s3">);</span>
+    <span class="s3">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s2">public void </span><span class="s1">onBindViewHolder</span><span class="s3">(</span><span class="s1">EntryViewHolder holder</span><span class="s3">, </span><span class="s2">int </span><span class="s1">position</span><span class="s3">) {</span>
+        <span class="s1">PlantEntry entrada </span><span class="s3">= </span><span class="s1">entradas</span><span class="s3">.</span><span class="s1">get</span><span class="s3">(</span><span class="s1">position</span><span class="s3">);</span>
+
+        <span class="s1">holder</span><span class="s3">.</span><span class="s1">txtNombre</span><span class="s3">.</span><span class="s1">setText</span><span class="s3">(</span><span class="s1">entrada</span><span class="s3">.</span><span class="s1">getNombre</span><span class="s3">());</span>
+        <span class="s1">holder</span><span class="s3">.</span><span class="s1">txtFrecuencia</span><span class="s3">.</span><span class="s1">setText</span><span class="s3">(</span><span class="s4">&quot;Riego: cada &quot; </span><span class="s3">+ </span><span class="s1">entrada</span><span class="s3">.</span><span class="s1">getFrecuenciaRiego</span><span class="s3">() + </span><span class="s4">&quot; días&quot;</span><span class="s3">);</span>
+        <span class="s1">holder</span><span class="s3">.</span><span class="s1">txtAgua</span><span class="s3">.</span><span class="s1">setText</span><span class="s3">(</span><span class="s4">&quot;Agua: &quot; </span><span class="s3">+ </span><span class="s1">entrada</span><span class="s3">.</span><span class="s1">getCantidadAgua</span><span class="s3">());</span>
+        <span class="s1">holder</span><span class="s3">.</span><span class="s1">txtSol</span><span class="s3">.</span><span class="s1">setText</span><span class="s3">(</span><span class="s4">&quot;Sol: &quot; </span><span class="s3">+ </span><span class="s1">entrada</span><span class="s3">.</span><span class="s1">getCantidadSol</span><span class="s3">());</span>
+        <span class="s1">holder</span><span class="s3">.</span><span class="s1">txtComentarios</span><span class="s3">.</span><span class="s1">setText</span><span class="s3">(</span><span class="s4">&quot;Notas: &quot; </span><span class="s3">+ </span><span class="s1">entrada</span><span class="s3">.</span><span class="s1">getComentarios</span><span class="s3">());</span>
+
+
+        <span class="s1">Uri uri </span><span class="s3">= </span><span class="s1">Uri</span><span class="s3">.</span><span class="s1">parse</span><span class="s3">(</span><span class="s1">entrada</span><span class="s3">.</span><span class="s1">getImagenUri</span><span class="s3">());</span>
+        <span class="s1">Glide</span><span class="s3">.</span><span class="s1">with</span><span class="s3">(</span><span class="s1">context</span><span class="s3">)</span>
+                <span class="s3">.</span><span class="s1">load</span><span class="s3">(</span><span class="s1">uri</span><span class="s3">)</span>
+                <span class="s3">.</span><span class="s1">placeholder</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">drawable</span><span class="s3">.</span><span class="s1">ic_launcher_foreground</span><span class="s3">)</span>
+                <span class="s3">.</span><span class="s1">error</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">drawable</span><span class="s3">.</span><span class="s1">ic_launcher_foreground</span><span class="s3">)</span>
+                <span class="s3">.</span><span class="s1">into</span><span class="s3">(</span><span class="s1">holder</span><span class="s3">.</span><span class="s1">imgPlanta</span><span class="s3">);</span>
+
+        <span class="s1">holder</span><span class="s3">.</span><span class="s1">btnEliminar</span><span class="s3">.</span><span class="s1">setOnClickListener</span><span class="s3">(</span><span class="s1">v -&gt; </span><span class="s3">{</span>
+            <span class="s1">entradas</span><span class="s3">.</span><span class="s1">remove</span><span class="s3">(</span><span class="s1">position</span><span class="s3">);</span>
+            <span class="s1">EntryStorage</span><span class="s3">.</span><span class="s1">eliminarEntrada</span><span class="s3">(</span><span class="s1">context</span><span class="s3">, </span><span class="s1">position</span><span class="s3">);</span>
+            <span class="s1">notifyItemRemoved</span><span class="s3">(</span><span class="s1">position</span><span class="s3">);</span>
+            <span class="s1">notifyItemRangeChanged</span><span class="s3">(</span><span class="s1">position</span><span class="s3">, </span><span class="s1">entradas</span><span class="s3">.</span><span class="s1">size</span><span class="s3">());</span>
+        <span class="s3">});</span>
+    <span class="s3">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s2">public int </span><span class="s1">getItemCount</span><span class="s3">() {</span>
+        <span class="s2">return </span><span class="s1">entradas</span><span class="s3">.</span><span class="s1">size</span><span class="s3">();</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public static class </span><span class="s1">EntryViewHolder </span><span class="s2">extends </span><span class="s1">RecyclerView</span><span class="s3">.</span><span class="s1">ViewHolder </span><span class="s3">{</span>
+        <span class="s1">TextView txtNombre</span><span class="s3">, </span><span class="s1">txtFrecuencia</span><span class="s3">, </span><span class="s1">txtAgua</span><span class="s3">, </span><span class="s1">txtSol</span><span class="s3">, </span><span class="s1">txtComentarios</span><span class="s3">;</span>
+        <span class="s1">ImageView imgPlanta</span><span class="s3">;</span>
+        <span class="s1">ImageButton btnEliminar</span><span class="s3">;</span>
+
+        <span class="s2">public </span><span class="s1">EntryViewHolder</span><span class="s3">(</span><span class="s1">View itemView</span><span class="s3">) {</span>
+            <span class="s2">super</span><span class="s3">(</span><span class="s1">itemView</span><span class="s3">);</span>
+            <span class="s1">txtNombre </span><span class="s3">= </span><span class="s1">itemView</span><span class="s3">.</span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">txtNombre</span><span class="s3">);</span>
+            <span class="s1">txtFrecuencia </span><span class="s3">= </span><span class="s1">itemView</span><span class="s3">.</span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">txtFrecuencia</span><span class="s3">);</span>
+            <span class="s1">txtAgua </span><span class="s3">= </span><span class="s1">itemView</span><span class="s3">.</span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">txtAgua</span><span class="s3">);</span>
+            <span class="s1">txtSol </span><span class="s3">= </span><span class="s1">itemView</span><span class="s3">.</span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">txtSol</span><span class="s3">);</span>
+            <span class="s1">txtComentarios </span><span class="s3">= </span><span class="s1">itemView</span><span class="s3">.</span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">txtComentarios</span><span class="s3">);</span>
+            <span class="s1">imgPlanta </span><span class="s3">= </span><span class="s1">itemView</span><span class="s3">.</span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">imgPlanta</span><span class="s3">);</span>
+            <span class="s1">btnEliminar </span><span class="s3">= </span><span class="s1">itemView</span><span class="s3">.</span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">btnEliminar</span><span class="s3">);</span>
+        <span class="s3">}</span>
+    <span class="s3">}</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

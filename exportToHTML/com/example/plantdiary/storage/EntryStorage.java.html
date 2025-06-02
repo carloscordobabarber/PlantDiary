@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>EntryStorage.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+EntryStorage.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">plantdiary</span><span class="s2">.</span><span class="s1">storage</span><span class="s2">;</span>
+
+<span class="s3">// EntryStorage.java</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">plantdiary</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">PlantEntry</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s3">// EntryStorage.java</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Context</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">SharedPreferences</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">plantdiary</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">PlantEntry</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">gson</span><span class="s2">.</span><span class="s1">Gson</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">gson</span><span class="s2">.</span><span class="s1">reflect</span><span class="s2">.</span><span class="s1">TypeToken</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">reflect</span><span class="s2">.</span><span class="s1">Type</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">EntryStorage </span><span class="s2">{</span>
+    <span class="s0">private static final </span><span class="s1">String PREF_NAME </span><span class="s2">= </span><span class="s4">&quot;plant_diary_prefs&quot;</span><span class="s2">;</span>
+    <span class="s0">private static final </span><span class="s1">String KEY_ENTRADAS </span><span class="s2">= </span><span class="s4">&quot;entradas_guardadas&quot;</span><span class="s2">;</span>
+    <span class="s0">private static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">PlantEntry</span><span class="s2">&gt; </span><span class="s1">entradas </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+    <span class="s0">public static void </span><span class="s1">cargarDesdePreferencias</span><span class="s2">(</span><span class="s1">Context context</span><span class="s2">) {</span>
+        <span class="s1">SharedPreferences prefs </span><span class="s2">= </span><span class="s1">context</span><span class="s2">.</span><span class="s1">getSharedPreferences</span><span class="s2">(</span><span class="s1">PREF_NAME</span><span class="s2">, </span><span class="s1">Context</span><span class="s2">.</span><span class="s1">MODE_PRIVATE</span><span class="s2">);</span>
+        <span class="s1">String json </span><span class="s2">= </span><span class="s1">prefs</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">KEY_ENTRADAS</span><span class="s2">, </span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">json </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">Gson gson </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Gson</span><span class="s2">();</span>
+            <span class="s1">Type tipoLista </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TypeToken</span><span class="s2">&lt;</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">PlantEntry</span><span class="s2">&gt;&gt;(){}.</span><span class="s1">getType</span><span class="s2">();</span>
+            <span class="s1">entradas </span><span class="s2">= </span><span class="s1">gson</span><span class="s2">.</span><span class="s1">fromJson</span><span class="s2">(</span><span class="s1">json</span><span class="s2">, </span><span class="s1">tipoLista</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">entradas </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">guardarEnPreferencias</span><span class="s2">(</span><span class="s1">Context context</span><span class="s2">) {</span>
+        <span class="s1">SharedPreferences prefs </span><span class="s2">= </span><span class="s1">context</span><span class="s2">.</span><span class="s1">getSharedPreferences</span><span class="s2">(</span><span class="s1">PREF_NAME</span><span class="s2">, </span><span class="s1">Context</span><span class="s2">.</span><span class="s1">MODE_PRIVATE</span><span class="s2">);</span>
+        <span class="s1">SharedPreferences</span><span class="s2">.</span><span class="s1">Editor editor </span><span class="s2">= </span><span class="s1">prefs</span><span class="s2">.</span><span class="s1">edit</span><span class="s2">();</span>
+
+        <span class="s1">Gson gson </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Gson</span><span class="s2">();</span>
+        <span class="s1">String json </span><span class="s2">= </span><span class="s1">gson</span><span class="s2">.</span><span class="s1">toJson</span><span class="s2">(</span><span class="s1">entradas</span><span class="s2">);</span>
+        <span class="s1">editor</span><span class="s2">.</span><span class="s1">putString</span><span class="s2">(</span><span class="s1">KEY_ENTRADAS</span><span class="s2">, </span><span class="s1">json</span><span class="s2">);</span>
+        <span class="s1">editor</span><span class="s2">.</span><span class="s1">apply</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">agregarEntrada</span><span class="s2">(</span><span class="s1">Context context</span><span class="s2">, </span><span class="s1">PlantEntry entry</span><span class="s2">) {</span>
+        <span class="s1">entradas</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">entry</span><span class="s2">);</span>
+        <span class="s1">guardarEnPreferencias</span><span class="s2">(</span><span class="s1">context</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">PlantEntry</span><span class="s2">&gt; </span><span class="s1">obtenerEntradas</span><span class="s2">() {</span>
+        <span class="s0">return new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;(</span><span class="s1">entradas</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">public static void </span><span class="s1">eliminarEntrada</span><span class="s2">(</span><span class="s1">Context context</span><span class="s2">, </span><span class="s0">int </span><span class="s1">index</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">index </span><span class="s2">&gt;= </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">index </span><span class="s2">&lt; </span><span class="s1">entradas</span><span class="s2">.</span><span class="s1">size</span><span class="s2">()) {</span>
+            <span class="s1">entradas</span><span class="s2">.</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">index</span><span class="s2">);</span>
+            <span class="s1">guardarEnPreferencias</span><span class="s2">(</span><span class="s1">context</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>NewEntryActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+NewEntryActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">// NewEntryActivity.java</span>
+<span class="s2">package </span><span class="s1">com</span><span class="s3">.</span><span class="s1">example</span><span class="s3">.</span><span class="s1">plantdiary</span><span class="s3">;</span>
+
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">content</span><span class="s3">.</span><span class="s1">Intent</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">net</span><span class="s3">.</span><span class="s1">Uri</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">os</span><span class="s3">.</span><span class="s1">Bundle</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">provider</span><span class="s3">.</span><span class="s1">MediaStore</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">ArrayAdapter</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">Button</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">EditText</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">ImageView</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">RadioButton</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">RadioGroup</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">Spinner</span><span class="s3">;</span>
+
+<span class="s2">import </span><span class="s1">androidx</span><span class="s3">.</span><span class="s1">activity</span><span class="s3">.</span><span class="s1">result</span><span class="s3">.</span><span class="s1">ActivityResultLauncher</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">androidx</span><span class="s3">.</span><span class="s1">activity</span><span class="s3">.</span><span class="s1">result</span><span class="s3">.</span><span class="s1">contract</span><span class="s3">.</span><span class="s1">ActivityResultContracts</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">androidx</span><span class="s3">.</span><span class="s1">appcompat</span><span class="s3">.</span><span class="s1">app</span><span class="s3">.</span><span class="s1">AppCompatActivity</span><span class="s3">;</span>
+
+<span class="s2">import </span><span class="s1">com</span><span class="s3">.</span><span class="s1">example</span><span class="s3">.</span><span class="s1">plantdiary</span><span class="s3">.</span><span class="s1">models</span><span class="s3">.</span><span class="s1">PlantEntry</span><span class="s3">;</span>
+<span class="s2">import </span><span class="s1">com</span><span class="s3">.</span><span class="s1">example</span><span class="s3">.</span><span class="s1">plantdiary</span><span class="s3">.</span><span class="s1">storage</span><span class="s3">.</span><span class="s1">EntryStorage</span><span class="s3">;</span>
+
+<span class="s2">public class </span><span class="s1">NewEntryActivity </span><span class="s2">extends </span><span class="s1">AppCompatActivity </span><span class="s3">{</span>
+
+    <span class="s2">private </span><span class="s1">EditText etNombre</span><span class="s3">, </span><span class="s1">etFrecuencia</span><span class="s3">, </span><span class="s1">etComentarios</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">Spinner spinnerAgua</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">RadioGroup radioGroupSol</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">Button btnGuardar</span><span class="s3">, </span><span class="s1">btnSeleccionarImagen</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">ImageView previewImagen</span><span class="s3">;</span>
+
+    <span class="s2">private </span><span class="s1">Uri imagenSeleccionadaUri </span><span class="s3">= </span><span class="s2">null</span><span class="s3">;</span>
+
+    <span class="s0">// Lanzador de la galería</span>
+    <span class="s2">private final </span><span class="s1">ActivityResultLauncher</span><span class="s3">&lt;</span><span class="s1">Intent</span><span class="s3">&gt; </span><span class="s1">selectorImagenLauncher </span><span class="s3">=</span>
+            <span class="s1">registerForActivityResult</span><span class="s3">(</span><span class="s2">new </span><span class="s1">ActivityResultContracts</span><span class="s3">.</span><span class="s1">StartActivityForResult</span><span class="s3">(), </span><span class="s1">result -&gt; </span><span class="s3">{</span>
+                <span class="s2">if </span><span class="s3">(</span><span class="s1">result</span><span class="s3">.</span><span class="s1">getResultCode</span><span class="s3">() == </span><span class="s1">RESULT_OK </span><span class="s3">&amp;&amp; </span><span class="s1">result</span><span class="s3">.</span><span class="s1">getData</span><span class="s3">() != </span><span class="s2">null</span><span class="s3">) {</span>
+                    <span class="s1">imagenSeleccionadaUri </span><span class="s3">= </span><span class="s1">result</span><span class="s3">.</span><span class="s1">getData</span><span class="s3">().</span><span class="s1">getData</span><span class="s3">();</span>
+                    <span class="s1">previewImagen</span><span class="s3">.</span><span class="s1">setImageURI</span><span class="s3">(</span><span class="s1">imagenSeleccionadaUri</span><span class="s3">);</span>
+                <span class="s3">}</span>
+            <span class="s3">});</span>
+
+    <span class="s1">@Override</span>
+    <span class="s2">protected void </span><span class="s1">onCreate</span><span class="s3">(</span><span class="s1">Bundle savedInstanceState</span><span class="s3">) {</span>
+        <span class="s2">super</span><span class="s3">.</span><span class="s1">onCreate</span><span class="s3">(</span><span class="s1">savedInstanceState</span><span class="s3">);</span>
+        <span class="s1">setContentView</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">layout</span><span class="s3">.</span><span class="s1">activity_new_entry</span><span class="s3">);</span>
+
+        <span class="s1">etNombre </span><span class="s3">= </span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">etNombre</span><span class="s3">);</span>
+        <span class="s1">etFrecuencia </span><span class="s3">= </span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">etFrecuenciaRiego</span><span class="s3">);</span>
+        <span class="s1">etComentarios </span><span class="s3">= </span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">etComentarios</span><span class="s3">);</span>
+        <span class="s1">spinnerAgua </span><span class="s3">= </span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">spinnerCantidadAgua</span><span class="s3">);</span>
+        <span class="s1">radioGroupSol </span><span class="s3">= </span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">radioGroupSol</span><span class="s3">);</span>
+        <span class="s1">btnGuardar </span><span class="s3">= </span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">btnGuardar</span><span class="s3">);</span>
+        <span class="s1">btnSeleccionarImagen </span><span class="s3">= </span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">btnSeleccionarImagen</span><span class="s3">);</span>
+        <span class="s1">previewImagen </span><span class="s3">= </span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">R</span><span class="s3">.</span><span class="s1">id</span><span class="s3">.</span><span class="s1">previewImagen</span><span class="s3">);</span>
+
+        <span class="s1">ArrayAdapter</span><span class="s3">&lt;</span><span class="s1">CharSequence</span><span class="s3">&gt; </span><span class="s1">adapter </span><span class="s3">= </span><span class="s1">ArrayAdapter</span><span class="s3">.</span><span class="s1">createFromResource</span><span class="s3">(</span><span class="s2">this</span><span class="s3">,</span>
+                <span class="s1">R</span><span class="s3">.</span><span class="s1">array</span><span class="s3">.</span><span class="s1">opciones_agua</span><span class="s3">, </span><span class="s1">android</span><span class="s3">.</span><span class="s1">R</span><span class="s3">.</span><span class="s1">layout</span><span class="s3">.</span><span class="s1">simple_spinner_item</span><span class="s3">);</span>
+        <span class="s1">adapter</span><span class="s3">.</span><span class="s1">setDropDownViewResource</span><span class="s3">(</span><span class="s1">android</span><span class="s3">.</span><span class="s1">R</span><span class="s3">.</span><span class="s1">layout</span><span class="s3">.</span><span class="s1">simple_spinner_dropdown_item</span><span class="s3">);</span>
+        <span class="s1">spinnerAgua</span><span class="s3">.</span><span class="s1">setAdapter</span><span class="s3">(</span><span class="s1">adapter</span><span class="s3">);</span>
+
+        <span class="s1">btnSeleccionarImagen</span><span class="s3">.</span><span class="s1">setOnClickListener</span><span class="s3">(</span><span class="s1">v -&gt; </span><span class="s3">{</span>
+            <span class="s1">Intent intent </span><span class="s3">= </span><span class="s2">new </span><span class="s1">Intent</span><span class="s3">(</span><span class="s1">Intent</span><span class="s3">.</span><span class="s1">ACTION_PICK</span><span class="s3">, </span><span class="s1">MediaStore</span><span class="s3">.</span><span class="s1">Images</span><span class="s3">.</span><span class="s1">Media</span><span class="s3">.</span><span class="s1">EXTERNAL_CONTENT_URI</span><span class="s3">);</span>
+            <span class="s1">selectorImagenLauncher</span><span class="s3">.</span><span class="s1">launch</span><span class="s3">(</span><span class="s1">intent</span><span class="s3">);</span>
+        <span class="s3">});</span>
+
+        <span class="s1">btnGuardar</span><span class="s3">.</span><span class="s1">setOnClickListener</span><span class="s3">(</span><span class="s1">v -&gt; </span><span class="s3">{</span>
+            <span class="s1">String nombre </span><span class="s3">= </span><span class="s1">etNombre</span><span class="s3">.</span><span class="s1">getText</span><span class="s3">().</span><span class="s1">toString</span><span class="s3">();</span>
+            <span class="s1">String frecuencia </span><span class="s3">= </span><span class="s1">etFrecuencia</span><span class="s3">.</span><span class="s1">getText</span><span class="s3">().</span><span class="s1">toString</span><span class="s3">();</span>
+            <span class="s1">String cantidadAgua </span><span class="s3">= </span><span class="s1">spinnerAgua</span><span class="s3">.</span><span class="s1">getSelectedItem</span><span class="s3">().</span><span class="s1">toString</span><span class="s3">();</span>
+
+            <span class="s1">String cantidadSol </span><span class="s3">= </span><span class="s4">&quot;&quot;</span><span class="s3">;</span>
+            <span class="s2">int </span><span class="s1">checkedId </span><span class="s3">= </span><span class="s1">radioGroupSol</span><span class="s3">.</span><span class="s1">getCheckedRadioButtonId</span><span class="s3">();</span>
+            <span class="s2">if </span><span class="s3">(</span><span class="s1">checkedId </span><span class="s3">!= -</span><span class="s5">1</span><span class="s3">) {</span>
+                <span class="s1">RadioButton radio </span><span class="s3">= </span><span class="s1">findViewById</span><span class="s3">(</span><span class="s1">checkedId</span><span class="s3">);</span>
+                <span class="s1">cantidadSol </span><span class="s3">= </span><span class="s1">radio</span><span class="s3">.</span><span class="s1">getText</span><span class="s3">().</span><span class="s1">toString</span><span class="s3">();</span>
+            <span class="s3">}</span>
+
+            <span class="s1">String comentarios </span><span class="s3">= </span><span class="s1">etComentarios</span><span class="s3">.</span><span class="s1">getText</span><span class="s3">().</span><span class="s1">toString</span><span class="s3">();</span>
+            <span class="s1">String imagenUri </span><span class="s3">= (</span><span class="s1">imagenSeleccionadaUri </span><span class="s3">!= </span><span class="s2">null</span><span class="s3">) ? </span><span class="s1">imagenSeleccionadaUri</span><span class="s3">.</span><span class="s1">toString</span><span class="s3">() : </span><span class="s4">&quot;&quot;</span><span class="s3">;</span>
+
+            <span class="s1">PlantEntry nuevaEntrada </span><span class="s3">= </span><span class="s2">new </span><span class="s1">PlantEntry</span><span class="s3">(</span><span class="s1">nombre</span><span class="s3">, </span><span class="s1">frecuencia</span><span class="s3">, </span><span class="s1">cantidadAgua</span><span class="s3">, </span><span class="s1">cantidadSol</span><span class="s3">, </span><span class="s1">comentarios</span><span class="s3">, </span><span class="s1">imagenUri</span><span class="s3">);</span>
+            <span class="s1">EntryStorage</span><span class="s3">.</span><span class="s1">agregarEntrada</span><span class="s3">(</span><span class="s2">this</span><span class="s3">, </span><span class="s1">nuevaEntrada</span><span class="s3">);</span>
+
+            <span class="s1">finish</span><span class="s3">();</span>
+        <span class="s3">});</span>
+    <span class="s3">}</span>
+<span class="s3">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>PlantEntry.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+PlantEntry.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">plantdiary</span><span class="s2">.</span><span class="s1">models</span><span class="s2">;</span>
+<span class="s3">// PlantEntry.java</span>
+
+<span class="s0">public class </span><span class="s1">PlantEntry </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">String nombre</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String frecuenciaRiego</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String cantidadAgua</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String cantidadSol</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String comentarios</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String imagenUri</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">PlantEntry</span><span class="s2">(</span><span class="s1">String nombre</span><span class="s2">, </span><span class="s1">String frecuenciaRiego</span><span class="s2">, </span><span class="s1">String cantidadAgua</span><span class="s2">, </span><span class="s1">String cantidadSol</span><span class="s2">, </span><span class="s1">String comentarios</span><span class="s2">, </span><span class="s1">String imagenUri</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">frecuenciaRiego </span><span class="s2">= </span><span class="s1">frecuenciaRiego</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadAgua </span><span class="s2">= </span><span class="s1">cantidadAgua</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadSol </span><span class="s2">= </span><span class="s1">cantidadSol</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">comentarios </span><span class="s2">= </span><span class="s1">comentarios</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">imagenUri </span><span class="s2">= </span><span class="s1">imagenUri</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Getters</span>
+    <span class="s0">public </span><span class="s1">String getNombre</span><span class="s2">() { </span><span class="s0">return </span><span class="s1">nombre</span><span class="s2">; }</span>
+    <span class="s0">public </span><span class="s1">String getFrecuenciaRiego</span><span class="s2">() { </span><span class="s0">return </span><span class="s1">frecuenciaRiego</span><span class="s2">; }</span>
+    <span class="s0">public </span><span class="s1">String getCantidadAgua</span><span class="s2">() { </span><span class="s0">return </span><span class="s1">cantidadAgua</span><span class="s2">; }</span>
+    <span class="s0">public </span><span class="s1">String getCantidadSol</span><span class="s2">() { </span><span class="s0">return </span><span class="s1">cantidadSol</span><span class="s2">; }</span>
+    <span class="s0">public </span><span class="s1">String getComentarios</span><span class="s2">() { </span><span class="s0">return </span><span class="s1">comentarios</span><span class="s2">; }</span>
+    <span class="s0">public </span><span class="s1">String getImagenUri</span><span class="s2">() { </span><span class="s0">return </span><span class="s1">imagenUri</span><span class="s2">; }</span>
+
+    <span class="s3">//Setters</span>
+    <span class="s0">public void </span><span class="s1">setNombre</span><span class="s2">(</span><span class="s1">String nombre</span><span class="s2">) { </span><span class="s0">this</span><span class="s2">.</span><span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">; }</span>
+    <span class="s0">public void </span><span class="s1">setFrecuenciaRiego</span><span class="s2">(</span><span class="s1">String frecuenciaRiego</span><span class="s2">) { </span><span class="s0">this</span><span class="s2">.</span><span class="s1">frecuenciaRiego </span><span class="s2">= </span><span class="s1">frecuenciaRiego</span><span class="s2">; }</span>
+    <span class="s0">public void </span><span class="s1">setCantidadAgua</span><span class="s2">(</span><span class="s1">String cantidadAgua</span><span class="s2">) { </span><span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadAgua </span><span class="s2">= </span><span class="s1">cantidadAgua</span><span class="s2">; }</span>
+    <span class="s0">public void </span><span class="s1">setCantidadSol</span><span class="s2">(</span><span class="s1">String cantidadSol</span><span class="s2">) { </span><span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadSol </span><span class="s2">= </span><span class="s1">cantidadSol</span><span class="s2">; }</span>
+    <span class="s0">public void </span><span class="s1">setComentarios</span><span class="s2">(</span><span class="s1">String comentarios</span><span class="s2">) { </span><span class="s0">this</span><span class="s2">.</span><span class="s1">comentarios </span><span class="s2">= </span><span class="s1">comentarios</span><span class="s2">; }</span>
+    <span class="s0">public void </span><span class="s1">setImagenUri</span><span class="s2">(</span><span class="s1">String imagenUri</span><span class="s2">) { </span><span class="s0">this</span><span class="s2">.</span><span class="s1">imagenUri </span><span class="s2">= </span><span class="s1">imagenUri</span><span class="s2">; }</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
